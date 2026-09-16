@@ -4,8 +4,8 @@ This timeline captures major engineering milestones. It is not a complete change
 
 ## 2026-08-27 — Hypervisor rebuild
 
-- Rebuilt the Dell PowerEdge R830 from ESXi to Proxmox
-- Established the `pve-r830-01` naming convention
+- Rebuilt the virtualization host from ESXi to Proxmox
+- Standardized the hypervisor naming convention
 - Validated management access and RAID-backed installation
 
 ## 2026-08-30 — Routed network cutover

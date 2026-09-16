@@ -12,7 +12,7 @@ flowchart TB
     Remote["Remote clients"] -->|"WireGuard"| FW
     FW --> SW["Juniper EX2200 access switch"]
     SW --> AP["ASUS wireless AP"]
-    SW --> PVE["Dell PowerEdge R830 / Proxmox"]
+    SW --> PVE["Proxmox hypervisor"]
     SW --> MEDIA["media-01"]
     SW --> TRANSIT["Cisco C1921 lab transit"]
     PVE --> MON["monitor-01 / Zabbix"]
@@ -43,7 +43,7 @@ See [Network Segmentation](docs/network-segmentation.md) for the trust model and
 |---|---|
 | OPNsense | Firewall, internal routing, NAT, DHCP, Unbound DNS, NTP, and WireGuard |
 | Juniper EX2200 | Managed switching, VLAN access/trunks, RSTP, management SVI, lab transit, and SNMP |
-| Dell PowerEdge R830 | Proxmox virtualization host |
+| Proxmox hypervisor | VM lifecycle and virtual networking |
 | Zabbix | Infrastructure, Linux, Docker, SNMP, and service monitoring |
 | ASUS AP | Home wireless access in access-point mode |
 | Docker | Media automation, photo management, and supporting services |

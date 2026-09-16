@@ -7,7 +7,7 @@ This page catalogs implemented service roles without including credentials, priv
 | Service | Host/role | Function |
 |---|---|---|
 | OPNsense | Virtual firewall | Routing, firewall, NAT, DHCP, DNS, NTP, WireGuard |
-| Proxmox | `pve-r830-01` | Virtualization and VM networking |
+| Proxmox | `hypervisor-01` | Virtualization and VM networking |
 | Zabbix | `monitor-01` | Infrastructure and application monitoring |
 | Juniper EX2200 | Access switch | VLAN switching, RSTP, SNMP |
 | ASUS AP | Wireless access | HOME VLAN wireless access |

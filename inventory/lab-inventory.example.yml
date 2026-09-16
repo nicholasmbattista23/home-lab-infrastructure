@@ -56,7 +56,7 @@ vlans:
     implementation: upstream-wan-access
 
 compute:
-  - hostname: pve-r830-01
+  - hostname: hypervisor-01
     platform: Proxmox
     role: hypervisor
     management_vlan: 40

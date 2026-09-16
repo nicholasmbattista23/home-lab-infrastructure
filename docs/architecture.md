@@ -6,7 +6,7 @@ The lab uses a virtualized firewall and service platform with a managed access s
 
 - OPNsense provides internal VLAN gateways, inter-VLAN policy, NAT, DHCP, Unbound DNS, NTP, and WireGuard.
 - A Juniper EX2200 provides VLAN-aware switching, RSTP, a management SVI, and a separate routed lab-transit interface.
-- A Dell PowerEdge R830 running Proxmox hosts infrastructure and application VMs.
+- A Proxmox hypervisor hosts infrastructure and application VMs.
 - An ASUS router operates only as a wireless access point.
 - Zabbix monitors the hypervisor, Linux hosts, Docker workloads, network devices, and selected application endpoints.
 
@@ -20,16 +20,16 @@ The historical Eero and flat `10.0.0.0/8` topology are retired and intentionally
 | Internal routing | OPNsense | VLAN gateways and inter-VLAN routing |
 | Access | Juniper EX2200 | VLAN access/trunk ports, RSTP, management SVI |
 | Lab transit | Juniper EX2200 / Cisco C1921 | Separate routed lab path |
-| Compute | Proxmox on Dell R830 | VM lifecycle and virtual networking |
+| Compute | Proxmox hypervisor | VM lifecycle and virtual networking |
 | Wireless | ASUS AP | HOME VLAN wireless access |
 | Observability | Zabbix | Metrics, availability, discovery, and alerting |
 | Services | Linux and Docker VMs | Media, game, storage, and automation workloads |
 
 ## Proxmox-to-switch paths
 
-The verified EX2200 configuration documents three distinct R830 links:
+The verified EX2200 configuration documents four distinct hypervisor links:
 
-| Switch port | R830 role |
+| Switch port | Hypervisor role |
 |---|---|
 | `ge-0/0/1` | Proxmox management access on MGMT |
 | `ge-0/0/7` | OPNsense WAN on HOME-LAN VLAN 100 |

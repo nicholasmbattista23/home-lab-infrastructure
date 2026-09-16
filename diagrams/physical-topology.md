@@ -4,21 +4,21 @@
 flowchart LR
     UPSTREAM["Upstream / ISP segment"] --> V100["EX2200 HOME-LAN
 VLAN 100"]
-    V100 --> WAN["R830 NIC1
+    V100 --> WAN["Hypervisor NIC1
 OPNsense WAN"]
 
-    PVE["Proxmox on Dell R830"] --> FWVM["OPNsense VM"]
+    PVE["Proxmox hypervisor"] --> FWVM["OPNsense VM"]
     WAN --> FWVM
 
-    FWVM --> LANTRUNK["R830 NIC2
+    FWVM --> LANTRUNK["Hypervisor NIC2
 OPNsense LAN trunk"]
     LANTRUNK --> EX["EX2200 ge-0/0/12"]
 
-    PVE --> VMTRUNK["R830 NIC3
+    PVE --> VMTRUNK["Hypervisor NIC3
 VM VLAN trunk"]
     VMTRUNK --> EX13["EX2200 ge-0/0/13"]
 
-    PVE --> MGMTNIC["R830 NIC0
+    PVE --> MGMTNIC["Hypervisor NIC0
 Proxmox MGMT"]
     MGMTNIC --> EX1["EX2200 ge-0/0/1"]
 
