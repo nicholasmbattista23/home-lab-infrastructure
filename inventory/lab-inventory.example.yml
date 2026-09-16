@@ -1,0 +1,78 @@
+site: home-lab
+status: operational
+
+network:
+  router:
+    platform: OPNsense
+    role:
+      - firewall
+      - inter-vlan-routing
+      - nat
+      - dhcp
+      - unbound-dns
+      - ntp
+      - wireguard
+  switch:
+    hostname: EX2200-LAB-01
+    platform: Juniper EX2200
+    role:
+      - layer2-switching
+      - rstp-root
+      - snmp
+  wireless:
+    platform: ASUS
+    mode: access-point
+    vlan: 10
+
+vlans:
+  - id: 10
+    name: HOME
+    subnet: 10.10.10.0/24
+  - id: 20
+    name: GUEST-LAB
+    subnet: 10.10.20.0/24
+  - id: 30
+    name: SERVERS
+    subnet: 10.10.30.0/24
+  - id: 40
+    name: MGMT
+    subnet: 10.10.40.0/24
+  - id: 50
+    name: IOT
+    subnet: 10.10.50.0/24
+  - id: 60
+    name: PRINTERS
+    subnet: 10.10.60.0/24
+  - id: 70
+    name: VPN
+    subnet: 10.10.70.0/24
+
+compute:
+  - hostname: pve-r830-01
+    platform: Proxmox
+    role: hypervisor
+    management_vlan: 40
+  - hostname: monitor-01
+    platform: Linux
+    role: zabbix
+    vlan: 40
+  - hostname: media-ingest-01
+    platform: Linux
+    role: docker-media-automation
+    vlan: 30
+  - hostname: media-01
+    platform: Linux
+    role: media-storage-services
+    vlan: 30
+  - hostname: palworld-01
+    platform: Linux
+    role: game-server
+    vlan: 30
+  - hostname: valheim-01
+    platform: Linux
+    role: game-server
+    vlan: 30
+
+notes:
+  - This is a sanitized documentation inventory.
+  - MAC addresses, public addresses, credentials, tokens, and serial numbers are excluded.

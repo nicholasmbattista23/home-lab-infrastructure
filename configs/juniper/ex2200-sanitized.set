@@ -1,0 +1,20 @@
+## Sanitized illustrative configuration.
+## Authentication, SNMP communities, management addresses, and unused ports are excluded.
+
+set system host-name EX2200-LAB-01
+
+set vlans HOME vlan-id 10
+set vlans GUEST-LAB vlan-id 20
+set vlans SERVERS vlan-id 30
+set vlans MGMT vlan-id 40
+set vlans IOT vlan-id 50
+set vlans PRINTERS vlan-id 60
+set vlans VPN vlan-id 70
+
+set protocols rstp bridge-priority 4k
+
+set interfaces ge-0/0/0 description ASUS_HOME_WIFI_AP
+set interfaces ge-0/0/0 unit 0 family ethernet-switching port-mode access
+set interfaces ge-0/0/0 unit 0 family ethernet-switching vlan members HOME
+
+## Add trunk configuration only after verifying the current physical port map.

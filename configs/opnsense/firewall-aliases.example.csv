@@ -1,0 +1,12 @@
+name,type,content,description
+NET_HOME,network,10.10.10.0/24,Trusted home clients
+NET_SERVERS,network,10.10.30.0/24,Application and server network
+NET_MGMT,network,10.10.40.0/24,Infrastructure management
+NET_VPN,network,10.10.70.0/24,Remote-access VPN clients
+MEDIA_SERVERS,host,"10.10.30.100,10.10.30.120",Sanitized media service examples
+GAME_SERVERS,host,"10.10.30.121,10.10.30.128",Sanitized game server examples
+MGMT_INFRA,host,"10.10.40.100,10.10.40.129,10.10.40.132",Sanitized management examples
+PORT_ZABBIX_AGENT,port,10050,Zabbix Agent 2
+PORT_SNMP,port,161,SNMP polling
+PORT_PLEX,port,32400,Plex service
+PORT_SMB,port,445,Samba service

@@ -1,0 +1,54 @@
+# Secrets and environment files
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.csr
+*.ovpn
+*.conf.private
+*secret*
+*token*
+*credential*
+
+# VPN and firewall exports
+wg*.conf
+wireguard/
+*.xml
+*.backup
+*.bak
+
+# Operational inventories and databases
+inventory/live/
+devices.csv
+hosts.csv
+*.db
+*.sqlite
+*.sqlite3
+
+# Captures, logs, and generated evidence
+*.pcap
+*.pcapng
+*.log
+logs/
+results/
+artifacts/
+
+# Application data
+media/
+photos/
+downloads/
+config/
+data/
+
+# Local tooling
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
