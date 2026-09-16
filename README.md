@@ -71,6 +71,7 @@ See [Network Segmentation](docs/network-segmentation.md) for the trust model and
 
 ## Repository guide
 
+- [Project status and next-session handoff](docs/project-status.md)
 - [Architecture](docs/architecture.md)
 - [Network segmentation](docs/network-segmentation.md)
 - [Security model](docs/security-model.md)
