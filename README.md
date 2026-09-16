@@ -77,6 +77,7 @@ See [Network Segmentation](docs/network-segmentation.md) for the trust model and
 - [Monitoring](docs/monitoring.md)
 - [Services](docs/services.md)
 - [Juniper EX2200 verified state](docs/juniper-ex2200.md)
+- [Network cleanliness backlog](docs/network-cleanliness.md)
 - [Build history](docs/build-history.md)
 - [Logical topology](diagrams/logical-topology.md)
 - [Physical topology](diagrams/physical-topology.md)
