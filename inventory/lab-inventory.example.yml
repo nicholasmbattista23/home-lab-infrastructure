@@ -6,7 +6,7 @@ network:
     platform: OPNsense
     role:
       - firewall
-      - inter-vlan-routing
+      - internal-vlan-routing
       - nat
       - dhcp
       - unbound-dns
@@ -14,10 +14,14 @@ network:
       - wireguard
   switch:
     hostname: EX2200-LAB-01
-    platform: Juniper EX2200
+    platform: Juniper EX2200-24T-4G
+    software: 12.3R12-S21
     role:
       - layer2-switching
+      - vlan-trunks
       - rstp-root
+      - management-svi
+      - lab-transit
       - snmp
   wireless:
     platform: ASUS
@@ -29,7 +33,7 @@ vlans:
     name: HOME
     subnet: 10.10.10.0/24
   - id: 20
-    name: GUEST-LAB
+    name: LAB
     subnet: 10.10.20.0/24
   - id: 30
     name: SERVERS
@@ -38,14 +42,18 @@ vlans:
     name: MGMT
     subnet: 10.10.40.0/24
   - id: 50
-    name: IOT
+    name: GUEST
     subnet: 10.10.50.0/24
   - id: 60
-    name: PRINTERS
+    name: IOT
     subnet: 10.10.60.0/24
   - id: 70
     name: VPN
     subnet: 10.10.70.0/24
+    implementation: opnsense-routed-tunnel
+  - id: 100
+    name: HOME-LAN
+    implementation: upstream-wan-access
 
 compute:
   - hostname: pve-r830-01
@@ -75,4 +83,4 @@ compute:
 
 notes:
   - This is a sanitized documentation inventory.
-  - MAC addresses, public addresses, credentials, tokens, and serial numbers are excluded.
+  - MAC addresses, public addresses, credentials, hashes, tokens, and serial numbers are excluded.

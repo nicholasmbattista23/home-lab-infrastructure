@@ -1,20 +1,72 @@
-## Sanitized illustrative configuration.
-## Authentication, SNMP communities, management addresses, and unused ports are excluded.
+## Sanitized subset derived from the verified EX2200 configuration.
+## Authentication hashes and the SNMP community are intentionally omitted.
 
 set system host-name EX2200-LAB-01
-
-set vlans HOME vlan-id 10
-set vlans GUEST-LAB vlan-id 20
-set vlans SERVERS vlan-id 30
-set vlans MGMT vlan-id 40
-set vlans IOT vlan-id 50
-set vlans PRINTERS vlan-id 60
-set vlans VPN vlan-id 70
-
-set protocols rstp bridge-priority 4k
+set system services ssh protocol-version v2
+set system ntp server 10.10.40.1
 
 set interfaces ge-0/0/0 description ASUS_HOME_WIFI_AP
 set interfaces ge-0/0/0 unit 0 family ethernet-switching port-mode access
 set interfaces ge-0/0/0 unit 0 family ethernet-switching vlan members HOME
 
-## Add trunk configuration only after verifying the current physical port map.
+set interfaces ge-0/0/1 description PVE-R830-01_NIC0_MGMT
+set interfaces ge-0/0/1 unit 0 family ethernet-switching port-mode access
+set interfaces ge-0/0/1 unit 0 family ethernet-switching vlan members MGMT
+
+set interfaces ge-0/0/2 description MEDIA-01
+set interfaces ge-0/0/2 unit 0 family ethernet-switching port-mode access
+set interfaces ge-0/0/2 unit 0 family ethernet-switching vlan members SERVERS
+
+set interfaces ge-0/0/4 description NBPI_ETH0
+set interfaces ge-0/0/4 unit 0 family ethernet-switching port-mode access
+set interfaces ge-0/0/4 unit 0 family ethernet-switching vlan members HOME
+
+set interfaces ge-0/0/7 description PVE-R830-01_NIC1_OPNSENSE_WAN
+set interfaces ge-0/0/7 unit 0 family ethernet-switching port-mode access
+set interfaces ge-0/0/7 unit 0 family ethernet-switching vlan members HOME-LAN
+
+set interfaces ge-0/0/12 description PVE-R830-01_NIC2_OPNSENSE_LAN_TRUNK
+set interfaces ge-0/0/12 unit 0 family ethernet-switching port-mode trunk
+set interfaces ge-0/0/12 unit 0 family ethernet-switching vlan members HOME
+set interfaces ge-0/0/12 unit 0 family ethernet-switching vlan members LAB
+set interfaces ge-0/0/12 unit 0 family ethernet-switching vlan members SERVERS
+set interfaces ge-0/0/12 unit 0 family ethernet-switching vlan members MGMT
+set interfaces ge-0/0/12 unit 0 family ethernet-switching vlan members GUEST
+set interfaces ge-0/0/12 unit 0 family ethernet-switching vlan members IOT
+
+set interfaces ge-0/0/13 description PVE-R830-01_NIC3_VM_TRUNK
+set interfaces ge-0/0/13 unit 0 family ethernet-switching port-mode trunk
+set interfaces ge-0/0/13 unit 0 family ethernet-switching vlan members HOME
+set interfaces ge-0/0/13 unit 0 family ethernet-switching vlan members LAB
+set interfaces ge-0/0/13 unit 0 family ethernet-switching vlan members SERVERS
+set interfaces ge-0/0/13 unit 0 family ethernet-switching vlan members MGMT
+set interfaces ge-0/0/13 unit 0 family ethernet-switching vlan members GUEST
+set interfaces ge-0/0/13 unit 0 family ethernet-switching vlan members IOT
+
+set interfaces ge-0/0/23 description TRANSIT_TO_C1921-WAN-01
+set interfaces ge-0/0/23 unit 0 family inet address 172.16.255.2/30
+
+set interfaces vlan unit 0 family inet dhcp vendor-id Juniper-ex2200-24t-4g
+set interfaces vlan unit 40 family inet address 10.10.40.129/24
+
+set vlans HOME vlan-id 10
+set vlans LAB vlan-id 20
+set vlans SERVERS vlan-id 30
+set vlans MGMT vlan-id 40
+set vlans MGMT l3-interface vlan.40
+set vlans GUEST vlan-id 50
+set vlans IOT vlan-id 60
+set vlans HOME-LAN vlan-id 100
+set vlans HOME-LAN l3-interface vlan.0
+
+set routing-options static route 0.0.0.0/0 next-hop 172.16.255.1
+set routing-options static route 10.10.0.0/16 next-hop 10.10.40.1
+
+set protocols rstp bridge-priority 4k
+set protocols lldp interface all
+set protocols lldp-med interface all
+set protocols igmp-snooping vlan all
+set ethernet-switching-options storm-control interface all
+
+## Read-only SNMP is restricted to the monitoring server in the live configuration.
+## The community string is never stored in this repository.

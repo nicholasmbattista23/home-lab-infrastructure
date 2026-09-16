@@ -1,20 +1,23 @@
 # Network Segmentation
 
-OPNsense is the policy enforcement point for traffic crossing VLAN boundaries. The EX2200 transports VLANs and supplies access ports but does not replace the firewall policy layer.
+OPNsense is the policy enforcement point for traffic crossing internal VLAN boundaries. The EX2200 transports VLANs and supplies access/trunk ports while maintaining its own management and lab-transit connectivity.
 
-## VLAN plan
+## Verified VLAN plan
 
 | VLAN | Name | Subnet | Trust intent |
 |---:|---|---|---|
 | 10 | HOME | 10.10.10.0/24 | Trusted user devices and wireless clients |
-| 20 | GUEST/LAB | 10.10.20.0/24 | Temporary, guest, or test systems |
+| 20 | LAB | 10.10.20.0/24 | Lab and temporary test systems |
 | 30 | SERVERS | 10.10.30.0/24 | Application, media, and game servers |
 | 40 | MGMT | 10.10.40.0/24 | Infrastructure management |
-| 50 | IOT | 10.10.50.0/24 | Restricted IoT devices |
-| 60 | PRINTERS | 10.10.60.0/24 | Restricted printers and similar devices |
-| 70 | VPN | 10.10.70.0/24 | Authenticated remote-access clients |
+| 50 | GUEST | 10.10.50.0/24 | Restricted guest clients |
+| 60 | IOT | 10.10.60.0/24 | Restricted IoT devices |
+| 70 | VPN | 10.10.70.0/24 | Authenticated WireGuard clients |
+| 100 | HOME-LAN | Upstream-assigned | OPNsense WAN/upstream access segment |
 
-Each routed VLAN uses OPNsense as its default gateway.
+VLANs 10 through 60 are present on the EX2200 internal trunks. VLAN 70 is a routed WireGuard tunnel network inside OPNsense and is not currently an EX2200 switching VLAN. VLAN 100 carries the upstream/WAN access segment.
+
+Each internal routed VLAN uses OPNsense as its default gateway.
 
 ## Policy model
 
@@ -23,7 +26,7 @@ Each routed VLAN uses OPNsense as its default gateway.
 3. Permit trusted administrator sources to required management destinations.
 4. Permit client-to-application flows by documented port aliases.
 5. Prevent application/download systems from initiating sessions toward MGMT.
-6. Keep Guest, IoT, and Printers isolated unless a specific service requires access.
+6. Keep Guest and IoT isolated unless a specific service requires access.
 7. Keep WAN management closed; remote administration uses WireGuard.
 
 ## Firewall aliases
