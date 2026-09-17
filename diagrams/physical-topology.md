@@ -2,8 +2,7 @@
 
 ```mermaid
 flowchart LR
-    UPSTREAM["Upstream / ISP segment"] --> V100["EX2200 HOME-LAN
-VLAN 100"]
+    UPSTREAM["Upstream / ISP segment"] --> V100["Ting ONT Uplink"]
     V100 --> WAN["Hypervisor NIC1
 OPNsense WAN"]
 
