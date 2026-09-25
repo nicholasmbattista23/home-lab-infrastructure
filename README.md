@@ -83,6 +83,7 @@ See [Network Segmentation](docs/network-segmentation.md) for the trust model and
 - [Logical topology](diagrams/logical-topology.md)
 - [Physical topology](diagrams/physical-topology.md)
 - [Example inventory](inventory/lab-inventory.example.yml)
+- [Debian server baseline deployment](runbooks/debian-server-baseline.md)
 - [Runbooks](runbooks/)
 
 ## Current validation highlights
